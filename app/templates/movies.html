@@ -1,0 +1,105 @@
+<html>
+
+<head>
+
+  <meta charset="UTF-8"></meta>
+
+  <style>
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  .genre {
+    text-align: center;
+    display: block;
+  }
+
+  .text-wrapper {
+    display: inline-block;
+    min-width: 200px;
+    height: auto;
+    margin: 10;
+    padding-left: 10;
+    padding-right: 10;
+    padding-top: 10;
+    padding-bottom: 10;
+    color: white;
+    border-radius: 50px;
+    color: white;
+    transition: 0.3s;
+  }
+
+
+  .text-wrapper:hover {
+    height: auto;
+    padding-left: 40;
+    padding-right: 40;
+    padding-top: 20;
+    padding-bottom: 20;
+
+  }
+
+
+  .text {
+    font-family: "Verdana", serif;
+    font-weight: bold;
+    font-size: 20;
+    transition: 0.3s;
+  }
+
+
+  .text-wrapper:hover .text {
+    font-size: 30;
+  }
+
+  #sci-fi {background: #9E91FF;}
+  #action {background: #FF4C59;}
+  #horror {background: #B226FF;}
+  #drama {background: #0DC29E;}
+  #comedy {background: #FF9933;}
+  body {background: #e8e8e8;}
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="genre" ><div class="text-wrapper" id="ACTION"><p class="text">ACTION</p></div></div>
+  <div class="genre" ><div class="text-wrapper" id="SCI-FI"><p class="text">SCI-FI</p></div></div>
+  <div class="genre" ><div class="text-wrapper" id="HORROR"><p class="text">HORROR</p></div></div>
+  <div class="genre" ><div class="text-wrapper" id="DRAMA"><p class="text">DRAMA</p></div></div>
+  <div class="genre" ><div class="text-wrapper" id="COMEDY"><p class="text">COMEDY</p></div></div>
+
+
+<script>
+function getData(event) {
+  console.log(this);
+  let self = this; // context changes in onload, save the div reference here
+  let xhr = new XMLHttpRequest();
+  xhr.open('GET', "" + this.id, true);
+  xhr.onload = function (data) {
+    let json = JSON.parse(xhr.responseText);
+    self.childNodes[0].innerHTML = json.name; // add data to DOM
+    if (self.timeout) {clearTimeout(self.timeout)}; // remove last timeout
+    self.timeout = setTimeout(function () {
+      self.childNodes[0].innerHTML = self.id; // revert back to genre DOM
+    }, 7000);
+  };
+  xhr.send();
+}
+
+function registerListeners(ListenersArray) {
+  for (let i = 0; i<ListenersArray.length; i++) {
+    document.getElementById(ListenersArray[i]).addEventListener("click", getData);
+  }
+}
+
+registerListeners(["ACTION", "SCI-FI", "HORROR", "DRAMA", "COMEDY"]);
+</script>
+
+</body>
+
+</html>

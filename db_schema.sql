@@ -1,0 +1,8 @@
+
+CREATE TABLE IF NOT EXISTS genres;
+CREATE TABLE IF NOT EXISTS movies;
+CREATE TABLE IF NOT EXISTS movies_genres;
+
+CREATE TABLE genres ( `ID` INTEGER UNIQUE, `type` TEXT, PRIMARY KEY(`ID`) );
+CREATE TABLE movies ( `ID` INTEGER UNIQUE, `name` TEXT, `year` TEXT, `url` TEXT, PRIMARY KEY(`ID`) );
+CREATE TABLE movies_genres ( `ID_movie` INTEGER, `ID_genre` INTEGER, PRIMARY KEY(`ID_movie`,`ID_genre`) );

@@ -1,15 +1,12 @@
-# app/__init__.py
-
 from flask import Flask
 
-# Initialize the app
-app = Flask(__name__, instance_relative_config=True)
+# initialize the flask application object
+app = Flask(__name__)
 print("app initialized - __init__.py")
 
-# Load the views
-from app import views
+from app import controllers
 
-# Load the config file
+# configurate the application based on config.py
 app.config.from_object('config')
 
 # set sqlite database file path
